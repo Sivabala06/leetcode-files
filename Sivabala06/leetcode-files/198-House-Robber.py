@@ -14,7 +14,7 @@ class Solution:
         dp[0]=0
         dp[1]=nums[0]
         for i in range(1,n):
-            dp[i+1]=max(dp[i],dp[i-1]+nums[i])
+            dp[i]=max(dp[i-1],dp[i-2]+nums[i])
         return dp[n]
 
         
