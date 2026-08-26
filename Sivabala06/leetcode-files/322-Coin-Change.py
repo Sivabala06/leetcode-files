@@ -4,10 +4,15 @@ class Solution:
         if amount == 0:
             return 0
 
+        dp = {}
+
         def ash(t):
 
             if t == 0:
                 return 0
+
+            if t in dp:
+                return dp[t]
 
             best = float('inf')
 
@@ -21,7 +26,9 @@ class Solution:
 
                     best = min(best, 1 + result)
 
-            return best
+            dp[t] = best
+
+            return dp[t]
 
         ans = ash(amount)
 
