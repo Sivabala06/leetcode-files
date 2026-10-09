@@ -1,39 +1,39 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        l=0
-        r=len(nums)-1
-        k=[-1,-1]
-        # if len(nums)==1:
-        #     if target != nums[0]:
-        #         return k
+        # l=0
+        # r=len(nums)-1
+        # k=[-1,-1]
+        # # if len(nums)==1:
+        # #     if target != nums[0]:
+        # #         return k
             
-        # if len(nums)==2:
-        #     if nums[0]==nums[1]:
-        #         return [0,1]
-        #     return [0,0]
-        while l<=r:
-            mid=(l+r)//2
-            if nums[mid]==target:
-                ans=ans2=ans3=mid
-                while l<=r:
-                    l=mid-1
-                    mid=(l+r)//2
-                    if nums[mid]==target:
-                        ans2=mid
-                    r=mid-1
-                while l<=r:
-                    r=mid+1
-                    mid=(l+r)//2
-                    if nums[mid]==target:
-                        ans3=mid
-                    l=mid+1
-                return [ans2,ans3]
+        # # if len(nums)==2:
+        # #     if nums[0]==nums[1]:
+        # #         return [0,1]
+        # #     return [0,0]
+        # while l<=r:
+        #     mid=(l+r)//2
+        #     if nums[mid]==target:
+        #         ans2=ans3=mid
+        #         while l<=r:
+        #             l=mid-1
+        #             mid=(l+r)//2
+        #             if nums[mid]==target:
+        #                 ans2=mid
+        #             r=mid-1
+        #         while l<=r:
+        #             r=mid+1
+        #             mid=(l+r)//2
+        #             if nums[mid]==target:
+        #                 ans3=mid
+        #             l=mid+1
+        #         return [ans2,ans3]
                     
-            if target>nums[mid]:
-                l=mid+1
-            else :
-                r=mid-1
-        return k
+        #     if target>nums[mid]:
+        #         l=mid+1
+        #     else :
+        #         r=mid-1
+        # return k
 
         # if target in nums:
         #     try:
@@ -46,5 +46,36 @@ class Solution:
         #     elif nums[d]==nums[d-1] :
         #         return [d-1,d]
         # return [-1,-1]
+        # Helper function to find the first (leftmost) occurrence
+        def find_first(nums, target):
+            left, right = 0, len(nums) - 1
+            first = -1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] == target:
+                    first = mid
+                    right = mid - 1  
+                elif nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return first
+
+      
+        def find_last(nums, target):
+            left, right = 0, len(nums) - 1
+            last = -1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] == target:
+                    last = mid
+                    left = mid + 1   
+                elif nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return last
+
+        return [find_first(nums, target), find_last(nums, target)]
                 
         
